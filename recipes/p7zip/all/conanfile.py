@@ -60,12 +60,12 @@ class PSevenZipConan(ConanFile):
         self._patch_sources()
         with chdir(self, self.source_folder):
             autotools = Autotools(self)
-            autotools.make()
+            autotools.make(target='all3')
 
     def package(self):
         copy(self, "License.txt", src=os.path.join(self.source_folder, "DOC"), dst=os.path.join(self.package_folder, "licenses"))
         copy(self, "unRarLicense.txt", src=os.path.join(self.source_folder, "DOC"), dst=os.path.join(self.package_folder, "licenses"))
-        copy(self, "7za", src=os.path.join(self.source_folder, "bin"), dst=os.path.join(self.package_folder, "bin"))
+        copy(self, "*", src=os.path.join(self.source_folder, "bin"), dst=os.path.join(self.package_folder, "bin"))
 
     def package_info(self):
         self.cpp_info.includedirs = []
